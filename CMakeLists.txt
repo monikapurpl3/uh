@@ -28,6 +28,7 @@ include(ECMQtDeclareLoggingCategory)
 kde_enable_exceptions()
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT MSVC AND NOT WIN32)
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT MSVC)
     add_compile_options("-stdlib=libc++")
 endif()
 
@@ -64,7 +65,9 @@ endif()
 if (NOT ANDROID)
    find_package(KF6 ${KF_MIN_VERSION} OPTIONAL_COMPONENTS Crash)
    find_package(KDSingleApplication-qt6 CONFIG REQUIRED)
-   find_package(KF6WindowSystem ${KF_MIN_VERSION} CONFIG REQUIRED)
+   if (UNIX AND NOT APPLE)
+       find_package(KF6WindowSystem ${KF_MIN_VERSION} CONFIG REQUIRED)
+   endif()
 endif()
 
 find_package(KF6KirigamiAddons 1.8.0 REQUIRED)

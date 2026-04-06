@@ -21,7 +21,11 @@ if (TARGET KF6::Crash)
 endif()
 
 if (NOT ANDROID)
-    target_link_libraries(${PROJECT_NAME} KDAB::kdsingleapplication KF6::WindowSystem)
+    target_link_libraries(${PROJECT_NAME} KDAB::kdsingleapplication)
+endif()
+
+if (TARGET KF6::WindowSystem)
+    target_link_libraries(${PROJECT_NAME} KF6::WindowSystem)
 endif()
 if (NOT WIN32 AND NOT APPLE)
     target_link_libraries(${PROJECT_NAME} Qt::GuiPrivate)
@@ -39,4 +43,3 @@ if(APPLE)
         set_target_properties(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/misc/macos/Info.plist)
     endif()
 endif()
-

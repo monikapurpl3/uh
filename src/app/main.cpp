@@ -12,6 +12,9 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+// C++
+#include <cstdio>
+
 // Qt
 #include <QApplication>
 #include <QCommandLineOption>
@@ -271,6 +274,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     Q_INIT_RESOURCE(notifications);
 #endif
 #if defined(Q_OS_ANDROID) || defined(Q_OS_WIN) || defined(Q_OS_MACOS) || defined(Q_OS_IOS)
+#if defined(Q_OS_ANDROID) || defined(Q_OS_WIN) || defined(Q_OS_APPLE)
     Q_INIT_RESOURCE(images);
 #endif
 
