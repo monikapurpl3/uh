@@ -83,6 +83,16 @@ to `CMAKE_PREFIX_PATH` (or set the corresponding `*_DIR` variables).
 * The project is tested in KDE CI via [`windows-qt6.yml`][kde-ci-windows-template]
   and built for packaging via Craft jobs.
 
+#### Current Windows CI/toolchain overview (this repository)
+
+* `.gitlab-ci.yml` includes both `windows-qt6.yml` (regular Windows CI build)
+  and Craft-based Windows packaging jobs.
+* `.kde-ci.yml` defines the KDE dependency set used across CI, including
+  required KF6 components on Windows.
+* `CMakeLists.txt` requires KF6/Qt6 components for Windows (notably
+  `KF6::IconThemes`) and avoids passing `-stdlib=libc++` when building with
+  MSVC-compatible or Windows toolchains.
+
 ## Dependencies
 
 Kaidan requires some dependencies and makes use of some optional dependencies if they are available.
