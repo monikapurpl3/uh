@@ -12,6 +12,9 @@
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+// C++
+#include <cstdio>
+
 // Qt
 #include <QApplication>
 #include <QCommandLineOption>
