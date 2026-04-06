@@ -44,6 +44,58 @@ Downloadable builds are available on [Kaidan's download page][downloads].
 Instructions for using ready-made (nightly / stable) builds and for building
 Kaidan yourself can be found in our [Wiki][wiki].
 
+### Building on Windows
+
+Kaidan is continuously built on KDE's Windows CI using the MSVC/Qt 6 toolchain.
+The same dependency set is used by KDE Craft and is the recommended way to
+build Kaidan on Windows.
+
+For a beginner-friendly step-by-step guide, see
+[BUILDING_WINDOWS.md](BUILDING_WINDOWS.md).
+
+#### Recommended: KDE Craft
+
+1. Install and set up [KDE Craft][kde-craft].
+2. Build Kaidan via Craft:
+
+   ```powershell
+   craft kde/kaidan
+   ```
+
+3. Open a Craft shell and run Kaidan from there to ensure all runtime DLLs are
+   available in `PATH`.
+
+#### Alternative: manual CMake build in a Qt + KDE environment
+
+If you already have all required Qt 6/KF6 dependencies installed for MSVC,
+configure and build with CMake + Ninja from a Developer PowerShell:
+
+```powershell
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+```
+
+If CMake cannot find packages like `ECMConfig.cmake`, `KF6Config.cmake`,
+`QXmppQt6Config.cmake` or `Qt6KeychainConfig.cmake`, add their install prefixes
+to `CMAKE_PREFIX_PATH` (or set the corresponding `*_DIR` variables).
+
+#### Windows-specific notes
+
+* Kaidan requires `KF6::IconThemes` on Windows (`WIN32`) and initializes icon
+  theme support in the app entry point.
+* The project is tested in KDE CI via [`windows-qt6.yml`][kde-ci-windows-template]
+  and built for packaging via Craft jobs.
+
+#### Current Windows CI/toolchain overview (this repository)
+
+* `.gitlab-ci.yml` includes both `windows-qt6.yml` (regular Windows CI build)
+  and Craft-based Windows packaging jobs.
+* `.kde-ci.yml` defines the KDE dependency set used across CI, including
+  required KF6 components on Windows.
+* `CMakeLists.txt` requires KF6/Qt6 components for Windows (notably
+  `KF6::IconThemes`) and avoids passing `-stdlib=libc++` when building with
+  MSVC-compatible or Windows toolchains.
+
 ## Dependencies
 
 Kaidan requires some dependencies and makes use of some optional dependencies if they are available.
@@ -52,7 +104,7 @@ Kaidan requires some dependencies and makes use of some optional dependencies if
 
 The following dependencies are needed by Kaidan:
 
-* [Qt][qt-build-sources] >= 6.7.0 - Core | Concurrent | Qml | Quick | Svg | Sql | QuickControls2 | Xml | Multimedia | Positioning | Location | Qt6GuiPrivate (since Qt 6.10.0)
+* [Qt][qt-build-sources] >= 6.7.0 - Core | Concurrent | Qml | Quick | Svg | Sql | QuickControls2 | Xml | Multimedia | Positioning | Location (+ Qt6GuiPrivate since Qt 6.10.0 on non-Windows/non-Apple desktop targets)
 * [KDE Frameworks][kf] >= 6.11.0 - [ECM (extra-cmake-modules)][ecm] | [KIconThemes][kiconthemes] (for Windows) | [KWindowSystem][kwindowsystem] | [KIO][kio] | [Kirigami][kirigami-repo] | [Prison][prison]
 * [KDSingleApplication][kdsingleapplication]
 * [Kirigami Addons][kirigami-addons] >= 1.8.0
@@ -87,6 +139,8 @@ information on how to proceed in our [security.txt][securitytxt] or at the
 [ffmpegthumbs]: https://apps.kde.org/de/ffmpegthumbs/
 [gst-plugins-good]: https://gitlab.freedesktop.org/gstreamer/gstreamer/-/tree/main/subprojects/gst-plugins-good
 [icu]: https://icu.unicode.org
+[kde-craft]: https://community.kde.org/Craft
+[kde-ci-windows-template]: https://invent.kde.org/sysadmin/ci-utilities/-/blob/master/gitlab-templates/windows-qt6.yml
 [kaidan-screenshot]: https://www.kaidan.im/images/screenshots/screenshot-horizontal.png
 [kaidan-website]: https://kaidan.im
 [kaidan-website-repo]: https://invent.kde.org/websites/kaidan-im
