@@ -50,6 +50,9 @@ Kaidan is continuously built on KDE's Windows CI using the MSVC/Qt 6 toolchain.
 The same dependency set is used by KDE Craft and is the recommended way to
 build Kaidan on Windows.
 
+For a beginner-friendly step-by-step guide, see
+[BUILDING_WINDOWS.md](BUILDING_WINDOWS.md).
+
 #### Recommended: KDE Craft
 
 1. Install and set up [KDE Craft][kde-craft].
@@ -101,7 +104,7 @@ Kaidan requires some dependencies and makes use of some optional dependencies if
 
 The following dependencies are needed by Kaidan:
 
-* [Qt][qt-build-sources] >= 6.7.0 - Core | Concurrent | Qml | Quick | Svg | Sql | QuickControls2 | Xml | Multimedia | Positioning | Location | Qt6GuiPrivate (since Qt 6.10.0)
+* [Qt][qt-build-sources] >= 6.7.0 - Core | Concurrent | Qml | Quick | Svg | Sql | QuickControls2 | Xml | Multimedia | Positioning | Location (+ Qt6GuiPrivate since Qt 6.10.0 on non-Windows/non-Apple desktop targets)
 * [KDE Frameworks][kf] >= 6.11.0 - [ECM (extra-cmake-modules)][ecm] | [KIconThemes][kiconthemes] (for Windows) | [KWindowSystem][kwindowsystem] | [KIO][kio] | [Kirigami][kirigami-repo] | [Prison][prison]
 * [KDSingleApplication][kdsingleapplication]
 * [Kirigami Addons][kirigami-addons] >= 1.8.0
