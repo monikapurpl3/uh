@@ -45,7 +45,7 @@
 #if __has_include("KWindowSystem")
 #include <KWindowSystem>
 #endif
-#if defined(Q_OS_WINDOWS)
+#if defined(Q_OS_WIN)
 #include <KIconTheme>
 #endif
 // KDAB
@@ -270,11 +270,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #if defined(Q_OS_ANDROID)
     Q_INIT_RESOURCE(notifications);
 #endif
-#if defined(Q_OS_ANDROID) || defined(Q_OS_WINDOWS) || defined(Q_OS_APPLE)
+#if defined(Q_OS_ANDROID) || defined(Q_OS_WIN) || defined(Q_OS_APPLE)
     Q_INIT_RESOURCE(images);
 #endif
 
-#if defined(Q_OS_WINDOWS)
+#if defined(Q_OS_WIN)
     KIconTheme::initTheme();
 #endif
 
