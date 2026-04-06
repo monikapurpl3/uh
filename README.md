@@ -1,3 +1,4 @@
+# ignore the chatgpt codex slop, please, I just wanted help with building to Windows sob sob sob I need a good xmpp client
 <!--
 SPDX-FileCopyrightText: 2016 Linus Jahn <lnj@kaidan.im>
 
